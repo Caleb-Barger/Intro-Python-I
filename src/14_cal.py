@@ -29,8 +29,21 @@ it should use today’s date to get the month and year.
 
 import sys
 import calendar
-from datetime import datetime
+import datetime
 
-c = calendar.Calendar()
+if len(sys.argv) <= 2 and not len(sys.argv) == 1:
+  month = int(sys.argv[1])
+  year = None
+elif len(sys.argv) > 2:
+  month = int(sys.argv[1])
+  year = int(sys.argv[2])
+else:
+  print("pass in mm yy")
+  sys.exit()
 
-print(c.yeardayscalendar())
+
+if month and year:
+  print(calendar.month(year, month))
+elif month:
+  year = datetime.datetime.today().year
+  print(calendar.month(year, month))
